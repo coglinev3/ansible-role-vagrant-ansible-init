@@ -1,0 +1,64 @@
+---
+# file: roles/vagrant-ansible-init/tasks/configure-ssh-keys.yml
+
+# On official centos/6 and centos/7 images SSH PasswordAuthentication is
+# disabled on default. That's why we need vagrant's private key for each node
+# if we want to manage multiple vagrant nodes from one ansible management node.
+- name: "Get private SSH keys for all vagrant nodes"
+  copy:
+    src:  "{{ item.root }}{{ item.path }}"
+    dest: "{{ vagrant_home_directory }}/.ssh/id_rsa.{{ item.path.split('/')[0] }}"
+    owner: vagrant
+    group: vagrant
+    mode: 0400
+  no_log: true
+  with_filetree: "{{ vagrant_machines_directory }}"
+  when: '"private_key" in item.path'
+  tags:
+    - configure
+
+- name: "Scan and register SSH host keys based on hostname"
+  command: "ssh-keyscan {{ item }}"
+  register: key_scan_name
+  changed_when: false
+  with_items: "{{ hostvars }}"
+  tags:
+    - configure
+
+- name: "Scan and register SSH host keys based on IP-Address"
+  command: "ssh-keyscan {{ hostvars[item]['ansible_host'] }}"
+  register: key_scan_ip
+  changed_when: false
+  with_items: "{{ hostvars }}"
+  tags:
+    - configure
+
+- name: "Append SSH host keys based on hostname to list"
+  set_fact:
+    ssh_host_keys: "{{ ssh_host_keys }} + [ '{{ item.1 }}' ]"
+  no_log: true
+  with_subelements:
+     - "{{ key_scan_name['results'] }}"
+     - stdout_lines
+  tags:
+    - configure
+
+- name: "Append SSH host keys based on IP-Address to list"
+  set_fact:
+    ssh_host_keys: "{{ ssh_host_keys }} + [ '{{ item.1 }}' ]"
+  no_log: true
+  with_subelements:
+     - "{{ key_scan_ip['results'] }}"
+     - stdout_lines
+  tags:
+    - configure
+
+- name: "Write SSH host keys to /etc/ssh/ssh_known_hosts"
+  lineinfile:
+    path: /etc/ssh/ssh_known_hosts
+    state: present
+    create: yes
+    line: "{{ item }}"
+  with_items: "{{ ssh_host_keys }}"
+  tags:
+    - configure

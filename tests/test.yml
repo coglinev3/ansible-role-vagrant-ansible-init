@@ -1,0 +1,7 @@
+---
+# file: test.yml
+
+- hosts: management-node
+  become: true
+  roles:
+    - { role: vagrant-ansible-init }

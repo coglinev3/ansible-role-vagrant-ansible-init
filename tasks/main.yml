@@ -1,0 +1,11 @@
+---
+# file: roles/vagrant-ansible-init/tasks/main.yml
+
+# Configure Ansible
+- include_tasks: configure-ansible.yml
+
+# Configure /etc/hosts
+- include_tasks: configure-hosts.yml
+
+# Configure SSH keys
+- include_tasks: configure-ssh-keys.yml

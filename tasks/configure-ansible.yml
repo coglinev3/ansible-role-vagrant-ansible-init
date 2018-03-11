@@ -1,0 +1,13 @@
+---
+# file: roles/vagrant-ansible-init/tasks/configure-ansible.yml
+
+- name: "Set default inventory and roles path for ansible"
+  lineinfile:
+    path: /etc/ansible/ansible.cfg
+    state: present
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backup: yes
+  with_items: "{{ ansible_config }}"
+  tags:
+    - configure
