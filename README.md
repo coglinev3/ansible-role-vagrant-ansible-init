@@ -1,12 +1,12 @@
 # Ansible Role: vagrant-ansible-init
 
-The role was developed for a Vagrant environment, with one Magaement node and several Ansible clients. Among other things, the IP addresses and hostnames of the Ansible clients are entered in the `/etc/hosts` file. The SSH host keys of the client systems are determined and written to the file `/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user vagrant are determined for the different systems and stored in the directory `/home/vagrant/.ssh`. on the ansible management node.
+The role was developed for a Vagrant environment, with one management node and several Ansible clients. Among other things, the IP addresses and hostnames of the Ansible clients are entered in the `/etc/hosts` file. The SSH host keys of the client systems are determined and written to the file `/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user vagrant are determined for the different systems and stored in the directory `/home/vagrant/.ssh`. on the ansible management node.
 
 Thereafter, the Ansible management node can access the Ansible clients via SSH without turning StrictHostKeyChecking off.
 
 ## Requirements
 
-A Vagrant environment with [default shared directory](https://www.vagrantup.com/docs/provisioning/ansible_local.html) on Ansible Management node enabled (. → /vagrant).
+A Vagrant environment with [default shared directory](https://www.vagrantup.com/docs/provisioning/ansible_local.html) on Ansible management node enabled (. → /vagrant).
 
 ## Role Variables
 
