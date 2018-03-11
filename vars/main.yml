@@ -1,0 +1,10 @@
+---
+# file: roles/vagrant-ssh-keys/vars/main.yml
+
+ssh_host_keys: []
+host_ips: []
+ansible_config:
+  - regexp: '^#?inventory\s+=\s+'
+    line: "inventory       = /vagrant/provisioning/inventory.ini"
+  - regexp: '^#?roles_path\s+=\s+'
+    line: "roles_path = /vagrant/provisioning/roles:/etc/ansible/roles:/usr/share/ansible/roles"
