@@ -38,13 +38,13 @@ This role has been tested with an Enterprise Linux 7 system as Ansible master.
 - hosts: management-node
   become: true
   roles:
-    - { role: vagrant-ansible-init }
+    - { role: coglinev3.vagrant-ansible-init }
 
 ```
 
 ## Version
 
-Release: 1.0.0
+Release: 1.0.1
 
 ## License
 
