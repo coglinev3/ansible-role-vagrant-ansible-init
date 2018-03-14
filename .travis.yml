@@ -19,7 +19,7 @@ install:
   - ansible --version
 
   # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  - printf '[defaults]\nroles_path = ../' >ansible.cfg
   - sudo mkdir /etc/ansible
   - (travis_dir=$(pwd); cd /etc/ansible; sudo ln -s "${travis_dir}/ansible.cfg" .)
 
