@@ -4,4 +4,4 @@
 - hosts: management-node
   become: true
   roles:
-    - { role: coglinev3.vagrant-ansible-init }
+    - { role: vagrant-ansible-init }
