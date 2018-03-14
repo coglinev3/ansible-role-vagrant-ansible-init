@@ -25,6 +25,7 @@ install:
   - pwd
   - ls
   - ls -la /etc
+  - sudo mkdir /etc/ansible
   - ls -la /etc/ansible
 
 
