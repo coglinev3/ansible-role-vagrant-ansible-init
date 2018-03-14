@@ -22,10 +22,12 @@ install:
   - printf '[defaults]\nroles_path=../' >ansible.cfg
   ## - sudo mkdir -p /etc/ansible
   ##- sudo ln -s ansible.cfg /etc/ansible/ansible.cfg
-  - pwd
   - ls
-  - ls -la /etc
   - sudo mkdir /etc/ansible
+  - sudo mkdir /etc/ssh
+  - ls -la /etc
+  - (travis_dir=$(pwd); cd /etc/ansible; sudo ln -s "${travis_dir}/ansible.cfg" .)
+  - pwd
   - ls -la /etc/ansible
 
 
