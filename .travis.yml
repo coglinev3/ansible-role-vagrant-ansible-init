@@ -22,27 +22,23 @@ install:
   - printf '[defaults]\nroles_path=../' >ansible.cfg
   - sudo mkdir /etc/ansible
   - (travis_dir=$(pwd); cd /etc/ansible; sudo ln -s "${travis_dir}/ansible.cfg" .)
-  - pwd
-  - ls -la /etc/ansible
 
 
 script:
-  - cat /etc/ansible/ansible.cfg
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i tests/inventory tests/test.yml
   # Run the role/playbook again, checking to make sure it's idempotent.
-  ## - >
-  ##   ansible-playbook -i tests/inventory tests/test.yml
-  ##   | grep -q 'changed=0.*failed=0'
-  ##   && (echo 'Idempotence test: pass' && exit 0)
-  ##   || (echo 'Idempotence test: fail' && exit 1)
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
 
   # Debug output
-  - echo "*** /etc/hosts ***"
-  - cat /etc/hosts
-  - echo "*** /etc/ssh/ssh_known_hosts ***"
+  - test -r /etc/ansible/ansible.cfg  && cat /etc/ansible/ansible.cfg 
+  - test -r /etc/hosts && cat /etc/hosts
   - test -r /etc/ssh/ssh_known_hosts && cat /etc/ssh/ssh_known_hosts
 
 
