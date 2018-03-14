@@ -45,5 +45,6 @@ script:
   - echo "*** /etc/ssh/ssh_known_hosts ***"
   - [[ -r /etc/ssh/ssh_known_hosts ]] && cat /etc/ssh/ssh_known_hosts
 
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
