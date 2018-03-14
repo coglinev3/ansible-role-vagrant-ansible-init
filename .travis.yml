@@ -24,8 +24,7 @@ install:
   ##- sudo ln -s ansible.cfg /etc/ansible/ansible.cfg
   - ls
   - sudo mkdir /etc/ansible
-  - sudo mkdir /etc/ssh
-  - ls -la /etc
+  - sudo ls -la /etc
   - (travis_dir=$(pwd); cd /etc/ansible; sudo ln -s "${travis_dir}/ansible.cfg" .)
   - pwd
   - ls -la /etc/ansible
