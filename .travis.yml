@@ -43,7 +43,7 @@ script:
   - echo "*** /etc/hosts ***"
   - cat /etc/hosts
   - echo "*** /etc/ssh/ssh_known_hosts ***"
-  #- [[ -r /etc/ssh/ssh_known_hosts ]] && cat /etc/ssh/ssh_known_hosts
+  - test -r /etc/ssh/ssh_known_hosts && cat /etc/ssh/ssh_known_hosts
 
 
 notifications:
