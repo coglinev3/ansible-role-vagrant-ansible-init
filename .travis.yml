@@ -3,7 +3,7 @@ language: python
 python: "2.7"
 
 # Use the new container infrastructure
-sudo: false
+sudo: true
 
 # Install ansible
 addons:
@@ -19,11 +19,28 @@ install:
   - ansible --version
 
   # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  - printf '[defaults]\nroles_path = ../' >ansible.cfg
+  - sudo mkdir /etc/ansible
+  - sudo cp ansible.cfg /etc/ansible/ansible.cfg
+
 
 script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook -i tests/inventory tests/test.yml
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Debug output
+  - test -r /etc/ansible/ansible.cfg  && cat /etc/ansible/ansible.cfg 
+  - test -r /etc/hosts && cat /etc/hosts
+  - test -r /etc/ssh/ssh_known_hosts && cat /etc/ssh/ssh_known_hosts
+
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
