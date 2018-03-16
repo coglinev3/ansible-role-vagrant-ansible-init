@@ -46,7 +46,7 @@ This role has been tested with an Enterprise Linux 7 system as Ansible master.
 
 ## Version
 
-Release: 1.0.2
+Release: 1.0.3
 
 ## License
 
