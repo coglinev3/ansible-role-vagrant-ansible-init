@@ -3,7 +3,7 @@
 
 galaxy_info:
   author: Cogline.v3
-  description: This role performs the initial Ansible configuration in a Vagrant environment.
+  description: This role performs the initial Ansible configuration in a multi node Vagrant environment.
   license: BSD
   min_ansible_version: 2.4
   #github_branch:
