@@ -4,8 +4,9 @@
 - name: "Append host ip adresses to list"
   set_fact:
     host_ips: "{{ host_ips }} + [ '{{ item.value.ansible_host }} {{ item.key }}' ]"
-  no_log: true
-  with_dict: "{{ hostvars }}"
+  loop: "{{ lookup('dict', hostvars) }}"
+  loop_control:
+    label: "{{ item.value.ansible_host }} {{ item.key }} "
   tags:
     - configure
 
@@ -16,6 +17,6 @@
     regexp: "^{{ item }}$"
     line: "{{ item }}"
     backup: yes
-  with_items: "{{ host_ips }}"
+  loop: "{{ host_ips|flatten(levels=1) }}"
   tags:
     - configure
