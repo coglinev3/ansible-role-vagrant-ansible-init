@@ -1,12 +1,20 @@
 ---
 # file: roles/vagrant-ansible-init/tasks/configure-hosts.yml
 
+#- name: "Append host ip adresses to list"
+#  set_fact:
+#    host_ips: "{{ host_ips }} + [ '{{ item.value.ansible_host }} {{ item.key }}' ]"
+#  loop: "{{ lookup('dict', hostvars) }}"
+#  loop_control:
+#    label: "{{ item.value.ansible_host }} {{ item.key }} "
+#  tags:
+#    - configure
+
 - name: "Append host ip adresses to list"
   set_fact:
     host_ips: "{{ host_ips }} + [ '{{ item.value.ansible_host }} {{ item.key }}' ]"
-  loop: "{{ lookup('dict', hostvars) }}"
-  loop_control:
-    label: "{{ item.value.ansible_host }} {{ item.key }} "
+  no_log: true
+  with_dict: "{{ hostvars }}"
   tags:
     - configure
 
