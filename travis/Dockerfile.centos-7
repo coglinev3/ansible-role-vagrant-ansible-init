@@ -20,7 +20,8 @@ RUN yum makecache fast \
        git \
        ansible \
        which \
-       sudo
+       sudo \
+       openssh-server
 
 # Disable requiretty.
 RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
