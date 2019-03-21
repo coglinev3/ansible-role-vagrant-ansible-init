@@ -42,7 +42,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
   - >
     echo "Debug output: /etc/ssh/ssh_known_hosts"
-    && sudo cat /etc/ssh/ssh_known_hosts
+    && sudo ls /etc/ssh
   - >
     echo Stop and remove docker container
     && sudo docker stop "$(cat ${container_id})"
