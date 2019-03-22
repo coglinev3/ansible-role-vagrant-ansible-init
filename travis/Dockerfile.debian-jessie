@@ -7,10 +7,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get dist-upgrade -y \
-  && apt-get install -y software-properties-common \
+  && apt-get install -y --no-install-recommends \
+      software-properties-common \
       apt-utils \
       sudo \
       openssh-server \
+  && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
 # Install Ansible.
@@ -19,14 +21,17 @@ RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" \
   && apt-key adv --keyserver keyserver.ubuntu.com \
      --recv-keys 93C4A3FD7BB9C367 \
   && apt-get update \
-  && apt-get install -y \
+  && apt-get install -y && --no-install-recommends \
        git \
        ansible \
+  && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 
-# Install Ansible inventory file.
+# Prepare Ansible.
 RUN mkdir -p /etc/ansible \
   && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
 VOLUME [ "/sys/fs/cgroup" ]
 ENTRYPOINT ["/sbin/init"]
+
+# vim: syntax=dockerfile
