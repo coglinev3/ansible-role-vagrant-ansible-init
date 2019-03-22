@@ -2,9 +2,16 @@
 
 [![Build Status](https://travis-ci.org/coglinev3/vagrant-ansible-init.svg?branch=master)](https://travis-ci.org/coglinev3/vagrant-ansible-init)
 
-The role was developed for [this special Vagrant environment](https://ansible-development.readthedocs.io/), with one management node and several Ansible clients. Among other things, the IP addresses and hostnames of the Ansible clients are entered in the `/etc/hosts` file. The SSH host keys of the client systems are determined and written to the file `/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user vagrant are determined for the different systems and stored in the directory `/home/vagrant/.ssh`. on the ansible management node.
+The role was developed for initializing
+[a Multi-VM Vagrant environment](https://ansible-development.readthedocs.io/),
+with one management node and several Ansible clients. Different Ansible
+settings are made and the SSH host keys of the client systems are determined
+and written to the file `/etc/ssh/ssh_known_hosts`. Furthermore, the public
+SSH keys of the user vagrant are determined for the different systems and
+stored in the directory `/home/vagrant/.ssh`. on the ansible management node.
 
-Thereafter, the Ansible management node can access the Ansible clients via SSH without turning StrictHostKeyChecking off.
+Thereafter, the Ansible management node can access the Ansible clients via SSH
+without turning StrictHostKeyChecking off.
 
 ## Requirements
 
