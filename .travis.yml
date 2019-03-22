@@ -14,6 +14,8 @@ env:
     version: cosmic
   - distribution: debian
     version: jessie
+  - distribution: debian
+    version: stretch
 
 services:
   - docker
