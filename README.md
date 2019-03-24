@@ -63,7 +63,7 @@ The role can be used with the following operating systems as Ansible management 
 
 ## Version
 
-Release: 1.1.0
+Release: 1.2.0
 
 ## License
 
