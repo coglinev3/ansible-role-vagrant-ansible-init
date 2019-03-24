@@ -15,7 +15,7 @@ without turning StrictHostKeyChecking off.
 
 ## Requirements
 
-A Vagrant environment with [default shared directory](https://www.vagrantup.com/docs/provisioning/ansible_local.html) on Ansible management node enabled (. → /vagrant).
+[This Multi-VM Vagrant environment for Developing and Testing Ansible Roles](https://ansible-development.readthedocs.io/), Version 2.0.0 or higher.
 
 ## Role Variables
 
@@ -36,7 +36,15 @@ vagrant_machines_directory: /vagrant/.vagrant/machines/
 
 ## Dependencies
 
-This role has been tested with an Enterprise Linux 7 system as Ansible master.
+The role can be used with the following operating systems as Ansible management node:
+* CentOS 6
+* CentOS 7
+* Ubuntu 16.04 LTS (Xenial Xerus)
+* Ubuntu 18.04 LTS (Bionic Beaver)
+* Ubuntu 18.10 (Cosmic Cuttlefish)
+* Debian 8 (Jessie)
+* Debian 9 (Stretch)
+
 
 ## Example Playbook
 
@@ -44,7 +52,7 @@ This role has been tested with an Enterprise Linux 7 system as Ansible master.
 ---
 # file: test.yml
 
-- hosts: management-node
+- hosts: localhost
   become: true
   roles:
     - { role: coglinev3.vagrant-ansible-init }
