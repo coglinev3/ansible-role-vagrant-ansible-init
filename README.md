@@ -2,13 +2,22 @@
 
 [![Build Status](https://travis-ci.org/coglinev3/vagrant-ansible-init.svg?branch=master)](https://travis-ci.org/coglinev3/vagrant-ansible-init)
 
-The role was developed for [this special Vagrant environment](https://ansible-development.readthedocs.io/), with one management node and several Ansible clients. Among other things, the IP addresses and hostnames of the Ansible clients are entered in the `/etc/hosts` file. The SSH host keys of the client systems are determined and written to the file `/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user vagrant are determined for the different systems and stored in the directory `/home/vagrant/.ssh`. on the ansible management node.
+The role was developed for initializing
+[a Multi-VM Vagrant environment](https://ansible-development.readthedocs.io/),
+with one management node and several Ansible clients (see
+[Read the Docs](https://ansible-development.readthedocs.io/) for details about
+this environment). Different Ansible settings are made and the SSH host keys of
+the client systems are determined and written to the file
+`/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user
+vagrant are determined for the different systems and stored in the directory
+`/home/vagrant/.ssh`. on the ansible management node.
 
-Thereafter, the Ansible management node can access the Ansible clients via SSH without turning StrictHostKeyChecking off.
+Thereafter, the Ansible management node can access the Ansible clients via SSH
+without turning StrictHostKeyChecking off.
 
 ## Requirements
 
-A Vagrant environment with [default shared directory](https://www.vagrantup.com/docs/provisioning/ansible_local.html) on Ansible management node enabled (. → /vagrant).
+[This Multi-VM Vagrant environment for Developing and Testing Ansible Roles](https://ansible-development.readthedocs.io/), Version 2.0.0 or higher.
 
 ## Role Variables
 
@@ -29,7 +38,15 @@ vagrant_machines_directory: /vagrant/.vagrant/machines/
 
 ## Dependencies
 
-This role has been tested with an Enterprise Linux 7 system as Ansible master.
+The role can be used with the following operating systems as Ansible management node:
+* CentOS 6
+* CentOS 7
+* Ubuntu 16.04 LTS (Xenial Xerus)
+* Ubuntu 18.04 LTS (Bionic Beaver)
+* Ubuntu 18.10 (Cosmic Cuttlefish)
+* Debian 8 (Jessie)
+* Debian 9 (Stretch)
+
 
 ## Example Playbook
 
@@ -37,7 +54,7 @@ This role has been tested with an Enterprise Linux 7 system as Ansible master.
 ---
 # file: test.yml
 
-- hosts: management-node
+- hosts: localhost
   become: true
   roles:
     - { role: coglinev3.vagrant-ansible-init }
@@ -46,7 +63,7 @@ This role has been tested with an Enterprise Linux 7 system as Ansible master.
 
 ## Version
 
-Release: 1.1.0
+Release: 1.2.0
 
 ## License
 
