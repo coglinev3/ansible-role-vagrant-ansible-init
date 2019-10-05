@@ -46,6 +46,7 @@ The role can be used with the following operating systems as Ansible management 
 * Ubuntu 18.10 (Cosmic Cuttlefish)
 * Debian 8 (Jessie)
 * Debian 9 (Stretch)
+* Debian 10 (Buster)
 
 
 ## Example Playbook
