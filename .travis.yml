@@ -16,6 +16,8 @@ env:
     version: jessie
   - distribution: debian
     version: stretch
+  - distribution: debian
+    version: buster
 
 services:
   - docker
