@@ -12,6 +12,8 @@ env:
     version: bionic
   - distribution: ubuntu
     version: disco
+  - distribution: ubuntu
+    version: eoan
   - distribution: debian
     version: jessie
   - distribution: debian
