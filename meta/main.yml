@@ -16,7 +16,6 @@ galaxy_info:
       versions:
       - xenial
       - bionic
-      - cosmic
       - "disco dingo"
     - name: Debian
       versions:
