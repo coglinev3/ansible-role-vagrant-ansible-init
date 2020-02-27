@@ -34,6 +34,9 @@ vagrant_home_directory: /home/vagrant
 # following line in the Vagrant file:
 # config.vm.synced_folder ".", "/vagrant", type: "virtualbox" 
 vagrant_machines_directory: /vagrant/.vagrant/machines/
+
+# default inventory file for Ansible
+ansible_inventory_file: /vagrant/provisioning/vagrant.ini
 ```
 
 ## Dependencies
