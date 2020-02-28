@@ -7,7 +7,7 @@
 
 - name: "Get private SSH keys for all vagrant nodes"
   copy:
-    src:  "{{ item.root }}{{ item.path }}"
+    src: "{{ item.root }}{{ item.path }}"
     dest: "{{ vagrant_home_directory }}/.ssh/id_rsa.{{ item.path.split('/')[0] }}"
     owner: vagrant
     group: vagrant
@@ -22,7 +22,7 @@
   command: "ssh-keyscan {{ item }}"
   register: key_scan_name
   changed_when: false
-  check_mode: no
+  check_mode: "no"
   loop: "{{ hostvars | flatten(levels=1) }}"
   tags:
     - configure
@@ -40,7 +40,7 @@
   lineinfile:
     path: /etc/ssh/ssh_known_hosts
     state: present
-    create: yes
+    create: "yes"
     line: "{{ item }}"
   loop: "{{ ssh_host_keys|flatten(levels=1) }}"
   loop_control:
