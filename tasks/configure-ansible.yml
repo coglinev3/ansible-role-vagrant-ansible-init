@@ -1,9 +1,6 @@
 ---
 # file: roles/vagrant-ansible-init/tasks/configure-ansible.yml
 
-- debug:
-    var: ansible_config
-
 - name: "Set default inventory and roles path for ansible"
   lineinfile:
     path: /etc/ansible/ansible.cfg
