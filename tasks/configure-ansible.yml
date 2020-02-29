@@ -7,7 +7,7 @@
     state: present
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
-    backup: yes
+    backup: "yes"
   with_items: "{{ ansible_config }}"
   tags:
     - configure

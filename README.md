@@ -34,18 +34,23 @@ vagrant_home_directory: /home/vagrant
 # following line in the Vagrant file:
 # config.vm.synced_folder ".", "/vagrant", type: "virtualbox" 
 vagrant_machines_directory: /vagrant/.vagrant/machines/
+
+# default inventory file for Ansible
+ansible_inventory_file: /vagrant/provisioning/vagrant.ini
 ```
 
 ## Dependencies
 
 The role can be used with the following operating systems as Ansible management node:
-* CentOS 6
-* CentOS 7
+* Enterprise Linux 6
+* Enterprise Linux 7
+* Enterprise Linux 8
 * Ubuntu 16.04 LTS (Xenial Xerus)
 * Ubuntu 18.04 LTS (Bionic Beaver)
-* Ubuntu 18.10 (Cosmic Cuttlefish)
+* Ubuntu 19.10 (Eoan Ermine)
 * Debian 8 (Jessie)
 * Debian 9 (Stretch)
+* Debian 10 (Buster)
 
 
 ## Example Playbook
@@ -63,7 +68,7 @@ The role can be used with the following operating systems as Ansible management 
 
 ## Version
 
-Release: 1.2.0
+Release: 1.3.0
 
 ## License
 
@@ -71,4 +76,4 @@ BSD
 
 ## Author Information
 
-This Ansible Role was created in 2018, by Cogline.v3.
+Copyright &copy; 2020 Cogline.v3.

@@ -3,6 +3,8 @@ sudo: required
 
 env:
   - distribution: centos
+    version: 8
+  - distribution: centos
     version: 7
   - distribution: centos
     version: 6
@@ -11,11 +13,13 @@ env:
   - distribution: ubuntu
     version: bionic
   - distribution: ubuntu
-    version: cosmic
+    version: eoan
   - distribution: debian
     version: jessie
   - distribution: debian
     version: stretch
+  - distribution: debian
+    version: buster
 
 services:
   - docker

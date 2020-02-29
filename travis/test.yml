@@ -8,6 +8,7 @@
       - regexp: '^#?inventory\s+=\s+'
         line: "inventory       = /etc/ansible/hosts"
       - regexp: '^#?roles_path\s+=\s+'
-        line: "roles_path = /vagrant/provisioning/roles:/etc/ansible/roles:/usr/share/ansible/roles"
+        line: "roles_path =
+          /vagrant/provisioning/roles:/etc/ansible/roles:/usr/share/ansible/roles"
   roles:
     - { role: vagrant-ansible-init }
