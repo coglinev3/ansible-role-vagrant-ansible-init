@@ -22,7 +22,7 @@
     owner: root
     group: root
     mode: '0644'
-    remote_src: yes
+    remote_src: true
   when: ansible_cfg.stat.isreg is not defined
 
 #- name: "Set interpreter discovery to auto"
@@ -50,8 +50,8 @@
     state: present
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
-    backrefs: yes
-    backup: "yes"
+    backrefs: true
+    backup: true
   with_items: "{{ ansible_config }}"
   tags:
     - configure
