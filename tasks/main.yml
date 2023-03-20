@@ -2,7 +2,7 @@
 # file: roles/vagrant-ansible-init/tasks/main.yml
 
 - name: "Define ansible_config."
-  set_fact:
+  ansible.builtin.set_fact:
     ansible_config: "{{ __ansible_config | list }}"
   when: ansible_config is not defined
 
