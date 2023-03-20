@@ -13,17 +13,22 @@ galaxy_info:
   platforms:
     - name: Alpine
       versions:
-        - "any"
+        - any
     - name: EL
       versions:
-        - 7
-        - 8
-        - 9
+        - "7"
+        - "8"
+        - "9"
     - name: Debian
       versions:
         - stretch
         - buster
         - bullseye
+    - name: Fedora
+      versions:
+        - "35"
+        - "36"
+        - "37"
     - name: Ubuntu
       versions:
         - bionic
