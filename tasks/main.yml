@@ -6,8 +6,8 @@
     ansible_config: "{{ __ansible_config | list }}"
   when: ansible_config is not defined
 
-# Configure Ansible
-- include_tasks: configure-ansible.yml
+- name: Configure Ansible
+  ansible.builtin.include_tasks: configure-ansible.yml
 
-# Configure SSH keys
-- include_tasks: configure-ssh-keys.yml
+- name: Configure SSH keys
+  ansible.builtin.include_tasks: configure-ssh-keys.yml

@@ -4,8 +4,10 @@
 ssh_host_keys: []
 host_ips: []
 __ansible_config:
-  - regexp: '^#?inventory\s+=\s+'
-    line: "inventory       = {{ ansible_inventory_file }}"
-  - regexp: '^#?roles_path\s+=\s+'
+  - regexp: '[#;]?interpreter_python\s*='
+    line: 'interpreter_python = auto'
+  - regexp: '[#;]?inventory\s*='
+    line: "inventory = {{ ansible_inventory_file }}"
+  - regexp: '[#;]?roles_path\s*='
     line: "roles_path =
       /vagrant/provisioning/roles:/etc/ansible/roles:/usr/share/ansible/roles"
