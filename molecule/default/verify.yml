@@ -1,0 +1,27 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: "Log in as User ansible and execute 'ansible-config dump'"
+      become: true
+      become_user: ansible
+      ansible.builtin.command: ansible-config dump
+      environment:
+        PATH: /usr/local/bin:/bin:/usr/bin
+      changed_when: false
+      register: ansible_config
+
+#    - name: Show Ansible Config
+#      ansible.builtin.debug:
+#        var: ansible_config
+
+    - name: Check if ansible is configured correctly.
+      ansible.builtin.assert:
+        that:
+          - "'/vagrant/provisioning/vagrant.ini' in ansible_config.stdout"
+          - "'/vagrant/provisioning/roles' in ansible_config.stdout"
+        fail_msg: "DEFAULT_HOST_LIST not configured properly"
+        success_msg: "Role works fine."

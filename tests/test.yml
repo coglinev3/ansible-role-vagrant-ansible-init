@@ -1,7 +1,8 @@
 ---
 # file: test.yml
 
-- hosts: management-node
+- name: Example playbook for using role coglinev3.vagrant_ansible_init
+  hosts: management-node
   become: true
   roles:
-    - { role: vagrant-ansible-init }
+    - { role: coglinev3.vagrant_ansible_init }

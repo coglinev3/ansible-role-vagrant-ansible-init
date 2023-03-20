@@ -1,13 +1,57 @@
 ---
 # file: roles/vagrant-ansible-init/tasks/configure-ansible.yml
 
-- name: "Set default inventory and roles path for ansible"
-  lineinfile:
+- name: "Check if Ansible configuration file exists."
+  ansible.builtin.stat:
+    path: /etc/ansible/ansible.cfg
+  register: ansible_cfg
+
+- name: "Create Ansible directory."
+  ansible.builtin.file:
+    path: /etc/ansible
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: "Create initial Ansible configuration file."
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/ansible.cfg"
+    dest: /etc/ansible/ansible.cfg
+    backup: true
+    owner: root
+    group: root
+    mode: '0644'
+    remote_src: true
+  when: ansible_cfg.stat.isreg is not defined
+
+#- name: "Set interpreter discovery to auto"
+#  ansible.builtin.lineinfile:
+#    path: /etc/ansible/ansible.cfg
+#    regexp: '^interpreter_python '
+#    insertafter: '^\[defaults\]'
+#    line: interpreter_python = auto
+#    backup: "yes"
+#  tags:
+#    - configure
+
+#- name: "Set default inventory"
+#  ansible.builtin.lineinfile:
+#    path: /etc/ansible/ansible.cfg
+#    regexp: '^;inventory='
+#    line: "inventory = {{ ansible_inventory_file }}"
+#    backrefs: yes
+#    state: present
+#    backup: "yes"
+
+- name: "Configure ansible"
+  ansible.builtin.lineinfile:
     path: /etc/ansible/ansible.cfg
     state: present
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
-    backup: "yes"
+    backrefs: true
+    backup: true
   with_items: "{{ ansible_config }}"
   tags:
     - configure

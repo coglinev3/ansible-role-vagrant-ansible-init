@@ -2,12 +2,21 @@
 # file: roles/vagrant-ansible-init/tasks/main.yml
 
 - name: "Define ansible_config."
-  set_fact:
+  ansible.builtin.set_fact:
     ansible_config: "{{ __ansible_config | list }}"
   when: ansible_config is not defined
 
-# Configure Ansible
-- include_tasks: configure-ansible.yml
+- name: Configure Ansible
+  ansible.builtin.include_tasks: configure-ansible.yml
 
-# Configure SSH keys
-- include_tasks: configure-ssh-keys.yml
+- name: Install dependencies
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+        - "setup-{{ ansible_distribution }}.yml"
+        - "setup-{{ ansible_os_family }}.yml"
+      skip: True
+
+- name: Configure SSH keys
+  ansible.builtin.include_tasks: configure-ssh-keys.yml

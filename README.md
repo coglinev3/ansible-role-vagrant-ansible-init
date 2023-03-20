@@ -1,23 +1,25 @@
 # Ansible Role: vagrant-ansible-init
 
-[![Build Status](https://travis-ci.org/coglinev3/vagrant-ansible-init.svg?branch=master)](https://travis-ci.org/coglinev3/vagrant-ansible-init)
+[![Build](https://github.com/coglinev3/ansible-role-vagrant-ansible-init/actions/workflows/build.yml/badge.svg)](https://github.com/coglinev3/ansible-role-vagrant-ansible-init/actions/workflows/build.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/ansible-role-vagrant-ansible-init) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://raw.githubusercontent.com/coglinev3/ansible-role-vagrant-ansible-init/master/LICENSE)
 
 The role was developed for initializing
 [a Multi-VM Vagrant environment](https://ansible-development.readthedocs.io/),
-with one management node and several Ansible clients (see
+with one Ansible management node and several Ansible clients (see
 [Read the Docs](https://ansible-development.readthedocs.io/) for details about
-this environment). Different Ansible settings are made and the SSH host keys of
-the client systems are determined and written to the file
-`/etc/ssh/ssh_known_hosts`. Furthermore, the public SSH keys of the user
-vagrant are determined for the different systems and stored in the directory
-`/home/vagrant/.ssh`. on the ansible management node.
+this environment). Various Ansible settings are made and the SSH host keys of
+the client systems are determined and written to the file `/etc/ssh/ssh_known_hosts`.
+In addition, the public SSH keys for the user vagrant for the different systems
+are determined and written to the directory `/home/vagrant/.ssh` on the Ansible
+management node.
 
-Thereafter, the Ansible management node can access the Ansible clients via SSH
-without turning StrictHostKeyChecking off.
+After that, the Ansible management node can access the Ansible clients via SSH
+with *StrictHostKeyChecking* activated.
+
 
 ## Requirements
 
-[This Multi-VM Vagrant environment for Developing and Testing Ansible Roles](https://ansible-development.readthedocs.io/), Version 2.0.0 or higher.
+[This Multi-VM Vagrant environment for Developing and Testing Ansible Roles](https://ansible-development.readthedocs.io/),
+Version 3.0.1 or higher.
 
 ## Role Variables
 
@@ -42,16 +44,22 @@ ansible_inventory_file: /vagrant/provisioning/vagrant.ini
 ## Dependencies
 
 The role can be used with the following operating systems as Ansible management node:
-* Enterprise Linux 6
-* Enterprise Linux 7
-* Enterprise Linux 8
-* Ubuntu 16.04 LTS (Xenial Xerus)
-* Ubuntu 18.04 LTS (Bionic Beaver)
-* Ubuntu 19.10 (Eoan Ermine)
-* Debian 8 (Jessie)
-* Debian 9 (Stretch)
-* Debian 10 (Buster)
-
+* Alpine 3.14,
+* Alpine 3.15,
+* Alpine 3.15,
+* Alpine 3.17,
+* Enterprise Linux 7, 
+* Enterprise Linux 8, 
+* Enterprise Linux 9, 
+* Debian 9 (Stretch),
+* Debian 10 (Buster),
+* Debian 11 (Bullseye),
+* Fedora 35,
+* Fedora 36.
+* Fedora 37.
+* Ubuntu 18.04 LTS (Bionic Beaver),
+* Ubuntu 20.04 LTS (Focal Fossa),
+* Ubuntu 22.04 LTS (Jammy Jellyfish).
 
 ## Example Playbook
 
@@ -59,16 +67,16 @@ The role can be used with the following operating systems as Ansible management 
 ---
 # file: test.yml
 
-- hosts: localhost
+- name: Example playbook for using role coglinev3.vagrant_ansible_init
+  hosts: management-node
   become: true
   roles:
-    - { role: coglinev3.vagrant-ansible-init }
-
+    - { role: coglinev3.vagrant_ansible_init }
 ```
 
 ## Version
 
-Release: 1.3.0
+Release: 1.4.0
 
 ## License
 
@@ -76,4 +84,4 @@ BSD
 
 ## Author Information
 
-Copyright &copy; 2020 Cogline.v3.
+Copyright &copy; 2023 Cogline.v3.

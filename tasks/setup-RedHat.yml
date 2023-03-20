@@ -1,0 +1,6 @@
+# file: roles/vagrant-ansible-init/tasks/main.yml
+
+- name: Install OpenSSH client package
+  ansible.builtin.yum:
+    name: openssh-clients
+    state: present
