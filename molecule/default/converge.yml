@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include coglinev3.vagrant_ansible_init"
+      ansible.builtin.include_role:
+        name: "coglinev3.vagrant_ansible_init"

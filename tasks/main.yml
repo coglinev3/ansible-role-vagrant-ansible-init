@@ -9,5 +9,14 @@
 - name: Configure Ansible
   ansible.builtin.include_tasks: configure-ansible.yml
 
+- name: Install dependencies
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - files:
+        - "setup-{{ ansible_distribution }}.yml"
+        - "setup-{{ ansible_os_family }}.yml"
+      skip: True
+
 - name: Configure SSH keys
   ansible.builtin.include_tasks: configure-ssh-keys.yml
